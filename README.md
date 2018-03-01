@@ -10,13 +10,13 @@ The iOS SDK has no dependencies.
 
 #### Adding to your project
 
-1. Add the following line to your app's `Podfile` :
+1. Download the SDK from https://puresdk.azurewebsites.net/ (credentials are provided by Unacast):
 
-```ruby
-pod 'pure'
-```
+2. Unzip the archive to ~/Documents/PureSDK.
 
-2. Find your app's Info.plist, right click, select "Open As", tap "Source Code", and paste the following.
+3. Drag the PureSDK.framework file into the Frameworks group of Xcode's Project Navigator. When prompted, select "Copy items if needed" and continue.
+
+4. Find your app's Info.plist, right click, select "Open As", tap "Source Code", and paste the following.
 These strings will be shown to the user when you request permissions. For the best results, change them to something that better suits your app :
 
 ```xml
@@ -42,7 +42,9 @@ What do these keys mean?
 - NSLocationAlwaysAndWhenInUsageDescription : Describes how your app will use location services and explains what extra features you can provide if the always option is selected. The presented dialogue gives the user the option between "Only when in use", "Always", or completely disable location services. Will only be used on iOS 11 or later.
 - NSMotionUsageDescription (optional) : Describes how your app uses motion tracking. If the user accepts this permission, we utilize the motion data to provide more accurate tracking with even less battery usage.
 
-3. That's it!
+5. That's it!
+
+*NOTE: A pod will be published imminently as an alternative option*
 
 ### Usage
 Start the SDK by calling the following method :
