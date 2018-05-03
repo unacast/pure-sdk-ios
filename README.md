@@ -7,7 +7,7 @@ The iOS SDK is available for applications targeting the iOS 9.0 SDK and above.
 The iOS SDK has no dependencies.
 
 ### Installation
-*You need a key to use this pod, and Unacast should have provided you with one.*
+*You need a password to use this pod, and Unacast should have provided you with one.*
 
 #### Adding to your project
 
