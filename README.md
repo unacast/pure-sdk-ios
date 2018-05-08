@@ -32,11 +32,6 @@ Then, find your app's `Info.plist`, right click, select `Open As`, tap `Source C
 <key>NSLocationAlwaysAndWhenInUsageDescription</key>
 <string>We'll show you interesting things around you, and with the "always" option, we'll also send you notifications when you come across something cool.</string>
 
-<!-- Optional - Allows us to track much more accurately and with less battery usage! Best of both worlds :) -->
-<key>NSMotionUsageDescription</key>
-<string>Give you suggestions based on your activity.</string>
-```
-
 See appendix [1] for information about these keys.
 These keys will be shown to the user when you request permissions. For the best results, change them to something that better suits your app.
 
@@ -135,7 +130,6 @@ Sample iBeacon Event :
 | NSLocationWhenInUse | Describes how your app will use location services in the foreground. |
 | NSLocationAlways | Describes how your app will use location services, both in the foreground and background. The presented alert gives the user the option between "Always", and "Never". Will only be used if the device is running iOS 10 or earlier. |
 | NSLocationAlwaysAndWhenIn | Describes how your app will use location services and explains what extra features you can provide if the always option is selected. The presented alert gives the user the option between "Only when in use", "Always", and "Never". Will only be used on iOS 11 or later. |
-| NSMotion | Describes how your app uses motion tracking. If the user accepts this permission, we utilize the motion data to provide more accurate tracking with even less battery usage. |
 
 ## What kind of data does the SDK collect
 With the default configuration, the SDK will collect information about what WiFi the user is connected to, his or her current location, and any nearby iBeacons. All events come with information about the device, such as the current battery level.
