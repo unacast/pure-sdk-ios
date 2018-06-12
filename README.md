@@ -27,8 +27,10 @@ https://puresdk.azurewebsites.net/cocoapods/versions/1.0.56.zip?key=INSERT_KEY_H
 2. Drag and drop PureSDK.framework into your project. Make sure the `Copy files` box is checked.
 3. Select the target you wish to integrate the SDK into.
 4. Find the "Linked Frameworks and Libraries" section, and delete the `PureSDK.framework` entry.
-4. Find the "Embedded Binaries" section, and add the `PureSDK.framework` that you just included into your project.
+5. Find the "Embedded Binaries" section, and add the `PureSDK.framework` that you just included into your project.
 (This was tested on Xcode 9.4)
+6. Add a the following `Run script` to your app. This is required to work around an appstore quirk :
+bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDK.framework/strip-frameworks.sh"
 
 #### Location Permissions
 
