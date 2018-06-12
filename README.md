@@ -30,13 +30,13 @@ https://puresdk.azurewebsites.net/cocoapods/versions/1.0.46.zip?key=INSERT_KEY_H
 4. Find the "Embedded Binaries" section, and add the `PureSDK.framework` that you just included into your project.
 (This was tested on Xcode 9.4)
 
-##### Location Permissions
+#### Location Permissions
 
 Some of the SDK's data collection source require extra keys in `Info.plist`, and some require the user to accept a pop up. We will never trigger the permission popups from our code. It is your responsibility to present the permission prompt alert at an appropriate time.
 
 - NSLocationWhenInUseUsageDescription : Describes how your app will use location services in the foreground. You must include this key if you wish to collect location events.
 - NSLocationAlwaysAndWhenInUseUsageDescription : Describes how your app will use location services and explains what extra features you can provide if the always option is selected. The presented alert gives the user the option between "Only when in use", "Always", and "Never". Only used on iOS 11 or later.
-- NSLocationAlwaysUsageDescription | Describes how your app will use location services, both in the foreground and background. The presented alert gives the user the option between "Always", and "Never". If your deployment target is at iOS 11 or higher, then you don't need this key, even if you wish to collect location events
+- NSLocationAlwaysUsageDescription : Describes how your app will use location services, both in the foreground and background. The presented alert gives the user the option between "Always", and "Never". If your deployment target is at iOS 11 or higher, then you don't need this key, even if you wish to collect location events
 
 As a recap, if your application is targeting iOS 11 or higher and you wish to track location events, then only the `WhenInUseUsage` and `AlwaysAndWhenInUseUsage` plist keys are required.
 If your application is targeting iOS 10 or below, then you need to include all keys for iOS 11 in addition to the `AlwaysUsage` key.
