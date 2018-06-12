@@ -7,17 +7,41 @@ The iOS SDK is available for applications targeting the iOS 9.0 SDK and above.
 The iOS SDK has no dependencies.
 
 ### Installation
-*You need a password to use this pod, and Unacast should have provided you with one.*
+*You need a key to use this pod, and Unacast should have provided you with one.*
 
-#### Adding to your project
+#### Cocoapods
 
-First off, add the following lines to your app's `Podfile` :
+First off find your key and add the following lines to your app's `Podfile` :
 ```ruby
 use_frameworks!
-pod 'PureSDK', :podspec => 'http://puresdk.azurewebsites.net/cocoapods/versions/latest?key=PASSWORD'
+pod 'PureSDK', :podspec => 'http://puresdk.azurewebsites.net/cocoapods/versions/latest?key=INSERT_KEY_HERE'
 ```
 
-Then, find your app's `Info.plist`, right click, select `Open As`, tap `Source Code`.  Paste the following :
+#### Dynamic Framework
+
+Download the latest version of the pod from :
+
+https://puresdk.azurewebsites.net/cocoapods/versions/1.0.46.zip?key=INSERT_KEY_HERE
+
+1. Open your project in Xcode.
+2. Drag and drop PureSDK.framework into your project. Make sure the `Copy files` box is checked.
+3. Select the target you wish to integrate the SDK into.
+4. Find the "Linked Frameworks and Libraries" section, and delete the `PureSDK.framework` entry.
+4. Find the "Embedded Binaries" section, and add the `PureSDK.framework` that you just included into your project.
+(This was tested on Xcode 9.4)
+
+##### Location Permissions
+
+Some of the SDK's data collection source require extra keys in `Info.plist`, and some require the user to accept a pop up. We will never trigger the permission popups from our code. It is your responsibility to present the permission prompt alert at an appropriate time.
+
+- NSLocationWhenInUseUsageDescription : Describes how your app will use location services in the foreground. You must include this key if you wish to collect location events.
+- NSLocationAlwaysAndWhenInUseUsageDescription : Describes how your app will use location services and explains what extra features you can provide if the always option is selected. The presented alert gives the user the option between "Only when in use", "Always", and "Never". Only used on iOS 11 or later.
+- NSLocationAlwaysUsageDescription | Describes how your app will use location services, both in the foreground and background. The presented alert gives the user the option between "Always", and "Never". If your deployment target is at iOS 11 or higher, then you don't need this key, even if you wish to collect location events
+
+As a recap, if your application is targeting iOS 11 or higher and you wish to track location events, then only the `WhenInUseUsage` and `AlwaysAndWhenInUseUsage` plist keys are required.
+If your application is targeting iOS 10 or below, then you need to include all keys for iOS 11 in addition to the `AlwaysUsage` key.
+
+Find your app's `Info.plist`, right click, select `Open As`, tap `Source Code` and paste the keys you will be using. Remember, these keys will be shown to your users.
 
 ```xml
 <!-- All iOS versions -->
@@ -26,14 +50,12 @@ Then, find your app's `Info.plist`, right click, select `Open As`, tap `Source C
 
 <!-- iOS 10 and below only -->
 <key>NSLocationAlwaysUsageDescription</key>
-<string>We'll show you interesting things around you, and send you notifications when you come across something cool.</string>
+<string>We'll show you interesting things around you.</string>
 
 <!-- iOS 11 and above only -->
 <key>NSLocationAlwaysAndWhenInUsageDescription</key>
 <string>We'll show you interesting things around you, and with the "always" option, we'll also send you notifications when you come across something cool.</string>
-
-See appendix [1] for information about these keys.
-These keys will be shown to the user when you request permissions. For the best results, change them to something that better suits your app.
+```
 
 ### Usage
 Start the SDK by calling the following method inside your App Delegate:
@@ -42,12 +64,6 @@ AppDelegate.m didFinishLaunchingWithOptions:
 ```objective-c
 [PureSDK startWithLaunchOptions:launchOptions];
 ```
-After the SDK is started, it remains idle until the appropriate permissions are granted. Our SDK will never trigger any permission prompts. The SDK listens for the following permission prompts :
-
-1. Location Permission  : Allows the to SDK to track location. Supports `Always`, and  `WhenInUse`.
-2. Motion Permission : Allows the SDK to optimize location tracking. Greatly increases location accuracy while also reducing battery usage.
-
-It is up to you to ask the user for permission to access private data. Because of the design of the SDK, you don't have to wait until the user accepts permissions to start the SDK. One call and you're good to go. The SDK will automatically adapt to any and all permission changes.
 
 To stop the SDK, call :
 ```objective-c
@@ -66,13 +82,14 @@ The SDK provides methods to send additional `metadata` about the user or device 
 #### Event
 
 To create an event, use :
-```objectivec
+```objective-c
 [PureSDK createEvent:<#(nonnull NSString *)#> payload:<#(nonnull NSDictionary *)#> success:^{
     <#code#>
 } failure:^(NSError * _Nullable error) {
     <#code#>
 }];
 ```
+
 The `type` describes what kind of event this is. Events are always added, not replaced.
 Subsequent calls to `createEvent` with the same `type` will create multiple events in the cloud.
 
@@ -89,11 +106,10 @@ The `type` has to be unique for each model you want to preserve.
 Subsequent calls for `associateMetadata` with the same `type` will overwrite the data sent on previous calls.
 
 ## Data Collection
-With the default configuration, the SDK will collect the following information :
 
-Physical Location
-Nearby iBeacons and Eddystone beacons
-Network Connection Status
+Location - Enabled only when the required location keys are included.
+Nearby iBeacons beacons - iBeacons use the same permissions as location.
+Network Connection Status - Always collected.
 
 Sample Location Event :
 ```
@@ -120,87 +136,3 @@ Sample iBeacon Event :
     "uuid": "2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6"
 }
 ```
-
-### Appendix
-
-[1] How are the `Info.plist` strings used?
-
-| Key | Description |
-|--|--|
-| NSLocationWhenInUse | Describes how your app will use location services in the foreground. |
-| NSLocationAlways | Describes how your app will use location services, both in the foreground and background. The presented alert gives the user the option between "Always", and "Never". Will only be used if the device is running iOS 10 or earlier. |
-| NSLocationAlwaysAndWhenIn | Describes how your app will use location services and explains what extra features you can provide if the always option is selected. The presented alert gives the user the option between "Only when in use", "Always", and "Never". Will only be used on iOS 11 or later. |
-
-## What kind of data does the SDK collect
-With the default configuration, the SDK will collect information about what WiFi the user is connected to, his or her current location, and any nearby iBeacons. All events come with information about the device, such as the current battery level.
-
-The following is an example of a geolocation event. All of these data are sent with each event.
-
-```json
-
-{
-
-"events" : {
-	"device": {
-		"activity": true,
-		"adid": "1e90927e-8e19-1348-b7e0-f36732db49bc",
-		"adidLimited": false,
-		"appId": "com.pure.example",
-		"appVersion": "1.1",
-		"location": "always",
-		"manufacturer": "apple",
-		"mcc": 242,
-		"mnc": 12,
-		"model": "F8331",
-		"os": "iPhone7,1",
-		"osVersion": "11.2",
-		"sdkVersion": "1.0",
-		"timestamp": "2018-02-01T11:49:31+00:00",
-		"trackingEnabled": true
-	},
-
-	"state" : {
-		"activity": "stationary,automotive",
-		"battery": 1.0,
-		"charging": false,
-		"foreground": true,
-		"timestamp" : "2018-02-01T11:49:31+00:00"
-	},
-
-	"location" : {
-		"altitude": 2,
-		"bearing": 2.2,
-		"lat": 12.3232322,
-		"lon": 12.3232322,
-		"speed": 4,
-		"timestamp": "2018-02-01T11:49:31+00:00",
-		"hacc": 2,
-		"vacc": 4,
-		"type": "LOCATION"
-	},
-
-	"event" : {
-		"altitude": 2,
-		"bearing": 2.2,
-		"lat": 12.3232322,
-		"lon": 12.3232322,
-		"speed": 4,
-		"timestamp": "2018-02-01T11:49:31+00:00",
-		"hacc": 2,
-		"vacc": 4,
-		"type": "LOCATION"
-	},
-
-	"connection" : {
-		"bssid": "Testing",
-		"updated": "2018-02-01T11:49:31+00:00",
-		"ssid": "testing",
-		"type": "wifi"
-	}
-}
-}
-
-```
-
-
-
