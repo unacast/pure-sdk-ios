@@ -103,6 +103,8 @@ Then, somewhere of your choosing (can be placed right after the above call if de
 [Pure startTracking];
 ```
 
+`initializeWithLaunchOptions` must be called before any other methods can be called on `Pure.h`
+
 At any time, event collection can be stopped by calling :
 ```objective-c
 [Pure stopTracking];
