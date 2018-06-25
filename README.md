@@ -84,7 +84,11 @@ pod 'PureSDKBluetooth', :podspec => 'https://puresdk.azurewebsites.net/cocoapods
 #### Dynamic Framework
 
 First, download `PureSDKBluetooth.framework` at `https://puresdk.azurewebsites.net/cocoapods/versions/bluetooth/latest?key=INSERT_KEY_HERE`.
-Then, follow instructions 1-5 as listed in  `Installation > Dynamic Framework`, except use `PureSDKBluetooth.framework` instead of `PureSDK.framework`.
+Then, follow instructions 1-7 as listed in  `Installation > Dynamic Framework`, except :
+1. use `PureSDKBluetooth.framework` instead of `PureSDK.framework`.
+2. add `bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDKBluetooth.framework/strip-frameworks.sh"` as a new line
+
+![finished-run-script](https://github.com/unacast/pure-sdk-ios/blob/master/blt_run_script.png)
 
 ## Usage
 
