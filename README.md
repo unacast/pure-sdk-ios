@@ -20,9 +20,9 @@ pod 'PureSDK', :podspec => 'http://puresdk.azurewebsites.net/cocoapods/sdk/versi
 
 ### Dynamic Framework
 
-Download the latest version of the pod from :
+Download the latest version of the framework from :
 
-`https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.60.zip?key=INSERT_KEY_HERE`
+`https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.61.zip?key=INSERT_KEY_HERE`
 
 1. Open your project in Xcode.
 2. Drag and drop `PureSDK.framework` into your project. Make sure the `Copy files` box is checked. *Uncheck* any selected targets. Click ok.
@@ -34,9 +34,11 @@ Download the latest version of the pod from :
 This script (written by the excellent team at RealmCocoa!) removes architecture slices that are used on the iOS simulator.
 
 That's it! These instructions were last tested on Xcode 9.4 (9F1027a) and Xcode 10 (10L176w). For comparison, your `General` tab should look like this :
+
 ![finished-settings](https://github.com/unacast/pure-sdk-ios/blob/master/dynamic_framework_integration_result.png)
 
 and the build phase "Strip Invalid Archs" should look like this :
+
 ![run-script](https://github.com/unacast/pure-sdk-ios/blob/master/run-script.png)
 
 ## Permissions
@@ -91,7 +93,7 @@ pod 'PureSDKBluetooth', :podspec => 'https://puresdk.azurewebsites.net/cocoapods
 #### Dynamic Framework
 
 The bluetooth framework can be downloaded at :
-`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.60.zip?key=INSERT_KEY_HERE`.
+`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.61.zip?key=INSERT_KEY_HERE`.
 
 Then, follow instructions 1-7 as listed in  `Installation > Dynamic Framework`, except :
 1. use `PureSDKBluetooth.framework` instead of `PureSDK.framework`.
@@ -148,7 +150,7 @@ To create an "event", use :
 ```
 
 The `type` describes what kind of event this is. Events are always added, not replaced.
-Subsequent calls to `createEventWithType` with equal `type` values will create multiple events in the cloud.
+Subsequent calls to `createEventWithType` with equal `type` values will create multiple events in the cloud. This method requires that the SDK has been started (`[Pure startTracking]`), and will return an error if that is not the case. To override this behavior, use the overloaded method and pass `YES` for the `force` parameter.
 
 ### Metadata
 
@@ -163,7 +165,7 @@ To associate some metadata with the current user, use :
 ```
 
 The `type` has to be unique for each payload you want to preserve.
-Subsequent calls to `associateMetadataWithType` with equal `type` values will overwrite the data sent on previous calls.
+Subsequent calls to `associateMetadataWithType` with equal `type` values will overwrite the data sent on previous calls. This method requires that the SDK has been started (`[Pure startTracking]`), and will return an error if that is not the case. To override this behavior, use the overloaded method and pass `YES` for the `force` parameter.
 
 We recently deprecated the old event methods and tweaked the naming a little (added "withType" for a better Swift interface), but the old calls will continue to work until they are removed from the SDK. Warnings will be displayed if deprecated methods are used.
 
