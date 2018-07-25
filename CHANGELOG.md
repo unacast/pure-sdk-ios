@@ -10,6 +10,12 @@
 - Seperate cloud config for when in use and always location tracking for better control of SDK.
 - Added ClientID property to Pure.h
 
+## 1.0.62
+- Updated internal AFNetworking code to fix 2 data races.
+- Audited and fixed CoreData implementation for data races.
+- Added locking to prevent concurrent modification to shared dictionaries.
+- Fixed a warning in CoreData on iOS 9.
+
 #### Known Bitcode Issue
 Archiving when integrating through Cocoapods while bitcode is turned on results in the below error. Workaround : Head to project settings, search for "Bitcode" and temporarily disable the "Enable Bitcode" setting. We will provide an update with a fix shortly. This issue does not affect regular compilation, as it only shows up while archiving.
 
