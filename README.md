@@ -55,8 +55,7 @@ Here are the `Info.plist` keys that Apple requires for location tracking :
 
 - `NSLocationAlwaysUsageDescription` : Describes how your app will use location services, both in the foreground and background. The presented alert gives the user the option between "Always", and "Never". If your deployment target is at iOS 11 or higher, then you don't need this key even if you wish to collect location events.
 
-Recap : if your application is targeting iOS 11 or higher and you wish to track location events, then only the `WhenInUseUsage` and `AlwaysAndWhenInUseUsage` plist keys are required.
-If your application is targeting iOS 10 or below, then you need to include all keys for iOS 11 in addition to the `AlwaysUsage` key.
+Recap : if your application is targeting iOS 11 or higher then only the `WhenInUseUsage` and `AlwaysAndWhenInUseUsage` plist keys are required. If your application is targeting iOS 10 or below, then you need to include all three of these keys.
 
 Find your app's `Info.plist`, right click, select `Open As`, tap `Source Code` and paste the keys you will be using. Remember, these keys will be shown to your users.
 
@@ -95,7 +94,7 @@ pod 'PureSDKBluetooth', :podspec => 'https://puresdk.azurewebsites.net/cocoapods
 The bluetooth framework can be downloaded at :
 `https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.62.zip?key=INSERT_KEY_HERE`.
 
-Then, follow instructions 1-7 as listed in  `Installation > Dynamic Framework`, except :
+Then, follow instructions 1-6 as listed in  `Installation > Dynamic Framework`, except :
 1. use `PureSDKBluetooth.framework` instead of `PureSDK.framework`.
 2. add `bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDKBluetooth.framework/strip-frameworks.sh"` as a new line. The finished "Strip Invalid Archs" run script should look like this :
 
