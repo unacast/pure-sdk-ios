@@ -39,7 +39,7 @@ That's it! These instructions were last tested on Xcode 9.4 (9F1027a) and Xcode 
 
 and the build phase "Strip Invalid Archs" should look like this :
 
-![run-script](https://github.com/unacast/pure-sdk-ios/blob/master/run-script.png)
+![run-script](https://github.com/unacast/pure-sdk-ios/blob/master/run_script.png)
 
 ## Permissions
 
