@@ -125,9 +125,13 @@ At any time, event collection can be stopped by calling :
 [Pure stopTracking];
 ```
 
-We recently added deprecation warnings for the `PureSDK` class because we moved to just `Pure`. In addition, (in version 1.0.59) added the `startTracking` call, which allows for better control of when the SDK tracks and when it doesn't. If you use the deprecated call `startTrackingWithLaunchOptions` call, this warning will be printed to the console :
+We recently added deprecation warnings for the `PureSDK` class because we moved to just `Pure`.
 
-> Warning, deprecated method used. SDK will not start. An additional call to `[Pure startTracking]` is required.
+In addition, (in version 1.0.59) we added the `startTracking` call, which allows for better control of when the SDK tracks and when it doesn't. If you use the deprecated call `startTrackingWithLaunchOptions:`, this warning will be printed to the console :
+
+> PureSDK: Warning, deprecated method used. The SDK will still start, but the new initialization pattern is `[Pure initializeWithLaunchOptions:]` and then `[Pure startTracking]`. Check the `Usage` section in the documentation for a more in depth explanation.
+
+To fix this, replace the call to `startTrackingWithLaunchOptions:` with `initializeWithLaunchOptions:` and add a call to `startTracking` at an appropriate location for your app.
 
 ## Configuration
 
