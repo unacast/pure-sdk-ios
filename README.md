@@ -22,7 +22,7 @@ pod 'PureSDK', :podspec => 'http://puresdk.azurewebsites.net/cocoapods/sdk/versi
 
 Download the latest version of the framework from :
 
-`https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.62.zip?key=INSERT_KEY_HERE`
+`https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.63.zip?key=INSERT_KEY_HERE`
 
 1. Open your project in Xcode.
 2. Drag and drop `PureSDK.framework` into your project. Make sure the `Copy files` box is checked. *Uncheck* any selected targets. Click ok.
@@ -92,7 +92,7 @@ pod 'PureSDKBluetooth', :podspec => 'https://puresdk.azurewebsites.net/cocoapods
 #### Dynamic Framework
 
 The bluetooth framework can be downloaded at :
-`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.62.zip?key=INSERT_KEY_HERE`.
+`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.63.zip?key=INSERT_KEY_HERE`.
 
 Then, follow instructions 1-6 as listed in  `Installation > Dynamic Framework`, except :
 1. use `PureSDKBluetooth.framework` instead of `PureSDK.framework`.
