@@ -7,7 +7,6 @@
 - Fixed issue that could cause the config service to fetch more often than necessary.
 - Fixed an issue that caused the "enableWhenInUse" config flag to have no effect.
 - Fixed an issue that caused the GPS to be enabled on app start when it was not needed.
-- Fixed not using passive bluetooth scanning while in background, if possible.
 - Avoid sending events to server before we've fetched config for the first time, for privacy concerns.
 - API: adidLimited now reports the correct value while sending in device configuration. (previously it was negated)
 - API: connection.timestamp defaults to current date if the last changed timestamp is not available.
