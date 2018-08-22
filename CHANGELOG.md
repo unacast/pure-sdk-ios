@@ -1,3 +1,6 @@
+## 1.0.64
+- Fixes multithreading issue. 
+
 ## 1.0.63
 
 - Improve battery efficency.
