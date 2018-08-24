@@ -1,3 +1,7 @@
+## 1.0.65
+- Increases reliablity of iBeacon event delivery while switching between foreground, background, terminated states.
+- Corrects Content-Type header sent with event payload.
+
 ## 1.0.64
 - Fixes multithreading issue. 
 
