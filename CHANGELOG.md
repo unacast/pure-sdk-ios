@@ -1,3 +1,7 @@
+## 1.0.66
+
+Coming soom.
+
 ## 1.0.65
 - Increases reliablity of iBeacon event delivery while switching between foreground, background, terminated states.
 - Corrects Content-Type header sent with event payload.
