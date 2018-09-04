@@ -3,7 +3,7 @@
 
 ## 1.0.66
 - Fix crash caused by concurrent execution of `-[CLLocationManager locationServicesEnabled]`
-- Implement internal timer with different timer API, with better background and battery performance.1
+- Implement internal timer with different timer API, with better background and battery performance.
 - Improve the speed at which live ibeacons are reported.
 - Dispatch to main thread before calling some methods on a location manager.
 - Create our tracked beacons with our own prefix, as to not conflict with any beacons you may be tracking.
