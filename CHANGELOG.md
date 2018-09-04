@@ -2,7 +2,7 @@
 - Fixes SDK reporting version number '1.0' to server.
 
 ## 1.0.66
-- Fix crash caused by concurrent execution of `[CLLocationManager -locationServicesEnabled]`
+- Fix crash caused by concurrent execution of `-[CLLocationManager locationServicesEnabled]`
 - Implement internal timer with different timer API, with better background and battery performance.1
 - Improve the speed at which live ibeacons are reported.
 - Dispatch to main thread before calling some methods on a location manager.
