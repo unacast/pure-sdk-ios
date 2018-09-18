@@ -1,8 +1,10 @@
+## 1.0.68
+- Prevent the SDK from attatching itself as the UNNotificationCenter delegate unless debug mode is enabled.
+
 ## 1.0.67
 - Fixes SDK reporting version number '1.0' to server.
 
 ## 1.0.66
-- Fix crash caused by concurrent execution of `-[CLLocationManager locationServicesEnabled]`
 - Implement internal timer with different timer API, with better background and battery performance.
 - Improve the speed at which live ibeacons are reported.
 - Dispatch to main thread before calling some methods on a location manager.
