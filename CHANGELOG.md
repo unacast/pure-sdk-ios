@@ -1,3 +1,10 @@
+## 1.0.69
+- Delete stored log messages after uploading them to our debug server.
+- Fetch cloud config when user location authorization changes, or when `-[Pure startTracking]` turns on the SDK.
+- Add a hard limit to how frequently the cloud configuration service is allowed to fetch config.
+- Fixed an issue that could manifest when calling `createEvent` or `associateMetadata` immediately after initializing the SDK.
+- Tentative fix for crash in `valueForDefault:`.
+
 ## 1.0.68
 - Prevent the SDK from attatching itself as the UNNotificationCenter delegate unless debug mode is enabled.
 
@@ -5,6 +12,7 @@
 - Fixes SDK reporting version number '1.0' to server.
 
 ## 1.0.66
+- Fix crash caused by concurrent execution of `-[CLLocationManager locationServicesEnabled]`
 - Implement internal timer with different timer API, with better background and battery performance.
 - Improve the speed at which live ibeacons are reported.
 - Dispatch to main thread before calling some methods on a location manager.
@@ -19,7 +27,6 @@
 - Fixes multithreading issue. 
 
 ## 1.0.63
-
 - Improve battery efficency.
 - Adressed remaining memory leaks.
 - Fixed issue that prevented clients from archiving while bitcode was enabled.
@@ -37,16 +44,14 @@
 - API: fixed sending extra information in beacon.uuid, field is now correctly formatted UUID.
 
 ## 1.0.62
-
 - Updated internal AFNetworking code to fix 2 data races.
 - Audited and fixed CoreData implementation for data races.
 - Added locking to prevent concurrent modification to shared dictionaries.
 - Fixed a warning in CoreData on iOS 9.
 
 ## 1.0.61
-
 - APIClient: Updated default value from "unknown" to "0001-01-01" for the departure date of a visit.
-- APIClient: Updated default value from "unknown" to -1 for the batterys level.
+- APIClient: Updated default value from "unknown" to -1 for the battery level.
 - APIClient: Fixed wrong version reported in HTTP calls.
 - Bitcode enabled on required architecture slices. (armv7 + arm64)
 - SDK reports correct version number when not integrated with Cocoapods.
