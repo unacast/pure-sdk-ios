@@ -1,4 +1,10 @@
+## 1.0.70
+- Report more hardware capabilities to server.
+
 ## 1.0.69
+- Allow unreachable beacons into our processing pipeline.
+- Allow unreachable beacons to cause live events.
+- Filter out Visit events that arrive after the SDK has been stopped.
 - Delete stored log messages after uploading them to our debug server.
 - Fetch cloud config when user location authorization changes, or when `-[Pure startTracking]` turns on the SDK.
 - Add a hard limit to how frequently the cloud configuration service is allowed to fetch config.
