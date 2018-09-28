@@ -1,3 +1,6 @@
+## 1.0.71
+- Fix issue in build system affecting customers using Enterprise Distribution.
+
 ## 1.0.70
 - Report more hardware capabilities to server.
 
