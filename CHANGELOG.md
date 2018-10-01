@@ -1,3 +1,6 @@
+## 1.0.72
+- Fixes crash related to `pur_isFluxloopRegion`.
+
 ## 1.0.71
 - Fix issue in build system affecting customers using Enterprise Distribution.
 
