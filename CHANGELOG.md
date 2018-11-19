@@ -1,3 +1,6 @@
+## 1.0.73
+- Make sure booleans are serialized as `true` or `false` and not `1` or `0`.
+
 ## 1.0.72
 - Fixes crash related to `pur_isFluxloopRegion`.
 
