@@ -4,19 +4,31 @@
 The iOS SDK is available for applications targeting iOS 9.0 and above.
 
 ## Installation
-*You need a key to use this framework, please contact us if you don't yet have one.*
+* This guide assumes you have obtained a key to use this *
+* framework, please contact us if you don't yet have one. *
 
-We currently support installation with Cocoapods and manual dynamic framework installation. 
-If needed, we can also support Carthage. Shoot us a slack message or email and we can get it set up.
+We support Cocoapods, Carthage, and manual Dynamic Framework installation. For those that require bitcode, we do build with bitcode enabled. 
 
 ### Cocoapods
 
-First off, find your key and add the following lines to your app's `Podfile` :
+Use the following, with your key substituted in :
 
 ```ruby
 use_frameworks!
 pod 'PureSDK', :podspec => 'http://puresdk.azurewebsites.net/cocoapods/sdk/versions/latest?key=INSERT_KEY_HERE'
 ```
+
+### Carthage
+
+Use the following, with your key substituted in :
+
+```ruby
+binary "https://puresdk.azurewebsites.net/carthage/sdk/PureSDK.json?key=INSERT_KEY_HERE"
+```
+
+Make sure you've followed the instructions on the Carthage website, specifically :
+1. Embedded Binaries should contain `Carthage/Build/iOS/PureSDK.framework` 
+2. Run script calling `/usr/local/bin/carthage copy-frameworks` (and opt. input/output file setup)
 
 ### Dynamic Framework
 
@@ -89,10 +101,22 @@ pod 'PureSDK', :podspec => 'https://puresdk.azurewebsites.net/cocoapods/sdk/vers
 pod 'PureSDKBluetooth', :podspec => 'https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/latest?key=INSERT_KEY_HERE'
 ```
 
+#### Carthage
+
+```ruby
+binary "https://puresdk.azurewebsites.net/carthage/sdk/PureSDK.json?key=INSERT_KEY_HERE"
+binary "https://puresdk.azurewebsites.net/carthage/sdk/PureSDKBluetooth.json?key=INSERT_KEY_HERE"
+```
+
+Make sure you've followed the instructions on the Carthage website, specifically :
+1. Embedded Binaries should contain `Carthage/Build/iOS/PureSDK.framework` and `Carthage/Build/iOS/PureSDKBluetooth.framework` 
+2. Run script calling `/usr/local/bin/carthage copy-frameworks` (and opt. input/output file setup)
+
 #### Dynamic Framework
 
 The bluetooth framework can be downloaded at :
-`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.73.zip?key=INSERT_KEY_HERE`.
+
+`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.73.zip?key=INSERT_KEY_HERE`
 
 Then, follow instructions 1-6 as listed in  `Installation > Dynamic Framework`, except :
 1. use `PureSDKBluetooth.framework` instead of `PureSDK.framework`.

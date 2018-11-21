@@ -1,5 +1,8 @@
 ## 1.0.73
-- Make sure booleans are serialized as `true` or `false` and not `1` or `0`.
+- Support for Carthage!
+- Rework dataflow in serialization code to fix crash caused by unexpected mutations of data.
+- Tentative fix for crash in database subsystem.
+- We now properly delay iBeacon, Eddystone, and Visit events if they arrive before our first location event.
 
 ## 1.0.72
 - Fixes crash related to `pur_isFluxloopRegion`.
