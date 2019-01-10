@@ -1,3 +1,20 @@
+Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
+
+## 1.0.74
+- Background requests are now used to upload events.
+- iOS11+ : Event uploads are immediately scheduled with a future start time.
+- iOS11+ : Improve time between config fetch times by scheduling fetch when app enters background state.
+- Improve time between config fetches in apps that are backgrounded frequently.
+- When `onlySendOnWifi` = YES, instead of waiting for WiFi to upload, immediately schedule a WiFi only network request.
+- Fix issue caused by handling of unreachable beacons.
+- Asynchronous versions of `pureIdentifier` and `isTracking` have been introduced to ensure the SDK has a chance to initialize first. The old versions are deprecated and will only work after the SDK has initialized.
+- Fix case where SDK could make config request before the SDK was initialized.
+- Introduce custom serilization code to speed defaults store.
+- On launch, this update performs some internal updates, listed below. These will not cause any delays in application startup.
+    1. Moves SDK files out of `Documents`, and into our own folder in `Application Support`.
+    2. Updates encoding method used in internal key value storage.
+    3. Performs a file attributes update on internal files.
+
 ## 1.0.73
 - Support for Carthage!
 - Rework dataflow in serialization code to fix crash caused by unexpected mutations of data.

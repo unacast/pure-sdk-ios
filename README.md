@@ -4,8 +4,8 @@
 The iOS SDK is available for applications targeting iOS 9.0 and above.
 
 ## Installation
-* This guide assumes you have obtained a key to use this *
-* framework, please contact us if you don't yet have one. *
+* This guide assumes you have obtained a key to use this
+framework, please contact us if you don't yet have one. *
 
 We support Cocoapods, Carthage, and manual Dynamic Framework installation. For those that require bitcode, we do build with bitcode enabled. 
 
@@ -34,7 +34,7 @@ Make sure you've followed the instructions on the Carthage website, specifically
 
 Download the latest version of the framework from :
 
-`https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.73.zip?key=INSERT_KEY_HERE`
+`https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.74.zip?key=INSERT_KEY_HERE`
 
 1. Open your project in Xcode.
 2. Drag and drop `PureSDK.framework` into your project. Make sure the `Copy files` box is checked. *Uncheck* any selected targets. Click ok.
@@ -45,7 +45,7 @@ Download the latest version of the framework from :
 `bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDK.framework/strip-frameworks.sh"`
 This script (written by the excellent team at RealmCocoa!) removes architecture slices that are used on the iOS simulator.
 
-That's it! These instructions were last tested on Xcode 9.4 (9F1027a) and Xcode 10 (10L176w). For comparison, your `General` tab should look like this :
+That's it! These instructions were last tested on Xcode 9.4 (9F1027a) and Xcode 10.1 (10B61). For comparison, your `General` tab should look like this :
 
 ![finished-settings](https://github.com/unacast/pure-sdk-ios/blob/master/dynamic_framework_integration_result.png)
 
@@ -116,7 +116,7 @@ Make sure you've followed the instructions on the Carthage website, specifically
 
 The bluetooth framework can be downloaded at :
 
-`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.73.zip?key=INSERT_KEY_HERE`
+`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.74.zip?key=INSERT_KEY_HERE`
 
 Then, follow instructions 1-6 as listed in  `Installation > Dynamic Framework`, except :
 1. use `PureSDKBluetooth.framework` instead of `PureSDK.framework`.
@@ -237,4 +237,4 @@ Sample iBeacon Event :
 }
 ```
 
-Each event has additional identifying information sent with it to determine the state of the user's device.
+Each event has additional data sent with to help make our data collection more precise.
