@@ -1,6 +1,7 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
 ## 1.0.74
+- Fixes crash which could occur if an event is saved without it's data blob.
 - Background requests are now used to upload events.
 - iOS11+ : Event uploads are immediately scheduled with a future start time.
 - iOS11+ : Improve time between config fetch times by scheduling fetch when app enters background state.
