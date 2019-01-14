@@ -1,5 +1,10 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.75
+- Lower memory usage while deleting objects from local database.
+- Slight network request optimizations.
+- Fixes a few memory leaks.
+
 ## 1.0.74
 - Fixes crash which could occur if an event is saved without its data blob.
 - Background requests are now used to upload events.
