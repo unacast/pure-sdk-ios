@@ -1,7 +1,7 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
 ## 1.0.78
-- Fixes issue where our internal default storage could become unavailable if we are launched in the background after a reboot or force quit.
+- Fixes issue where our internal default storage could become unavailable if we are launched in the background after a reboot or force quit before the user unlocks their device.
 
 ## 1.0.77
 - Changes encoding of "rssi" in Eddystone events to a number, previously it was a string.
