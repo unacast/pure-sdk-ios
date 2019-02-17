@@ -3,6 +3,7 @@ Any line containing "iOS11+", means only clients running iOS11 and greater will 
 ## 1.0.79
 - Added "locale" and "publisherId" fields to device information.
 - Allow customization of "publisherId" and "defaultConfigEndpoint" through framework Info.plist.
+- Perform some more validity checks before attempting to upload an event blob.
 
 ## 1.0.78
 - Fixes issue where our internal default storage could become unavailable if we are launched in the background after a reboot or force quit before the user unlocks their device.
