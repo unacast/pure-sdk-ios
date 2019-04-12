@@ -1,5 +1,26 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.80
+- Support for beacons that activate high priority tracking.
+- Support for retrying iBeacon monitoring and ranging if iOS reports an error.
+- All timestamps now have five decimal points.
+
+- Tweak some calls to iOS to make iBeacon service much more reliable.
+- Set `Pure.enableLogging = YES` before calling init to print logs to console.
+- Reduce the amount of warning messages printed from Apple APIs.
+- Do our best to mitigate buggy Apple KVO Swift implementations in Swift <= 4.2.
+- Improve the likelyhood of timers triggering while we're operating in the background.
+- Reduce the number of trips to the database while processing events, and reduce the frequency of saves.
+- Wraps all database operations in background tasks to prevent iOS from terminating the app during the transaction.
+- Perform clean up of internal files at regular intervals, vaccum database when opening.
+
+- Fix crash which occured if we try to upload a missing file.
+- Fix adidLimited being forced to true in config requests.
+- Fix event deviceInfo containing invalid "timestamp" value.
+- Fix issue that could cause us to schedule too many background config requests.
+- Fix a bug which caused duplicate event uploads.
+- Fix an issue which could cause us to miss a significant location event.
+
 ## 1.0.79
 - Added "locale" and "publisherId" fields to device information.
 - Allow customization of "publisherId" and "defaultConfigEndpoint" through framework Info.plist.
