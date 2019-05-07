@@ -1,5 +1,12 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.82
+- Fix issue which was be trigered by a certain high priority beacon configuration.
+
+## 1.0.81
+- Ignores -1 battery report from iOS.
+- Fixes incorrect Xcode project configuration resulting in logging code being included in release builds.
+
 ## 1.0.80
 - Support for beacons that activate high priority tracking.
 - Support for retrying iBeacon monitoring and ranging if iOS reports an error.
