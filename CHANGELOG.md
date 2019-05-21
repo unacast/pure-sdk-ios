@@ -1,5 +1,8 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.83
+- Fix incorrect whitelisted area check.
+
 ## 1.0.82
 - Fix issue which was be trigered by a certain high priority beacon configuration.
 
