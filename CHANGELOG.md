@@ -1,5 +1,8 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.84
+- Fixes incorrect whileInUse permission observation which caused the service to stay inactive even with proper permissions.
+
 ## 1.0.83
 - Fix incorrect whitelisted area check.
 
