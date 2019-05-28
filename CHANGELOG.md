@@ -1,5 +1,10 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.85
+- Extends background ranging time after recieving a `didEnterRegion` call.
+- Fixes ignored eddystone/ibeacon events which arrive right as the SDK is initializing.
+- Adds `eddystoneRipenessCheckTimerLength` and `iBeaconRipenessCheckTimerLength` for configurable eddystone and ibeacon batch event frequency.
+
 ## 1.0.84
 - Fixes incorrect whileInUse permission observation which caused the service to stay inactive even with proper permissions.
 
