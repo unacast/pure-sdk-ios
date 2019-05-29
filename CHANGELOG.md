@@ -1,9 +1,18 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
-## 1.0.85
+## 1.0.86
 - Extends background ranging time after recieving a `didEnterRegion` call.
-- Fixes ignored eddystone/ibeacon events which arrive right as the SDK is initializing.
+- Adds `hacc` field to live Beacons and batched beacons.
 - Adds `eddystoneRipenessCheckTimerLength` and `iBeaconRipenessCheckTimerLength` for configurable eddystone and ibeacon batch event frequency.
+- Removes `beaconTrySendLive` in favor of `iBeaconTrySendLive` and `eddystoneTrySendLive`.
+- Removes `beaconIgnoreDuplicatesPeriod` in favor of `liveiBeaconIngoreDuplicatesPeriod` and `liveEddystoneIgnoreDuplicatesPeriod`.
+- Allows `startTracking` to be called before `initializeWithLaunchOptions`. Clients should still call `initializeWithLaunchOptions` first.
+- Speed up internal default store by reading and writing on a concurrent queue. Use a barrier when writing to prevent concurrent modification.
+- Eddystone and iBeacon live event throttler now guarantees at least one live event will be sent per elapsed duplicate period.
+- Unreachable and reachable beacons now each have their own live event throttler.
+- Fixes ignored eddystone/ibeacon events which arrive right as the SDK is initializing.
+- Fixes incorrect field being sent with live eddystone data.
+- Fixes completion block not getting called when there were no serialized event batches to clean up.
 
 ## 1.0.84
 - Fixes incorrect whileInUse permission observation which caused the service to stay inactive even with proper permissions.
