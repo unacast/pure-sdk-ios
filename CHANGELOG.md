@@ -1,6 +1,6 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
-## 1.0.87
+## 1.0.88
 - Identify and remove mitigation for Apple KVO crash introduced in .80 as source of intermittent UI lag.
 - Reduce timer churn in areas with many eddystone and ibeacons.
 - Reduce latency of live event sending while processing large amounts of eddystone discoveries.
