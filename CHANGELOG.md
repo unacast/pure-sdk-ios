@@ -1,5 +1,10 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.89
+- Adds a `X-PUBLISHER-ID` header if `PURPublisherId` is set to a non-default value in the SDK's Info.plist. `publisherId` is always present in `device` event payloads, with a default value of `none`.
+- Reduces memory footprint by enabling dispatch release pools on SDK queues.
+- Fixes a bug in the .80 migration process which caused default folder to not be migrated. This version restores the old default store.
+
 ## 1.0.88
 - Identify and remove mitigation for Apple KVO crash introduced in .80 as source of intermittent UI lag.
 - Reduce timer churn in areas with many eddystone and ibeacons.
