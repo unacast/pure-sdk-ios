@@ -1,5 +1,8 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.90
+- Fixes dispatch release pools not available on iOS 9.
+
 ## 1.0.89
 - Adds a `X-PUBLISHER-ID` header if `PURPublisherId` is set to a non-default value in the SDK's Info.plist. `publisherId` is always present in `device` event payloads, with a default value of `none`.
 - Reduces memory footprint by enabling dispatch release pools on SDK queues.
