@@ -7,7 +7,12 @@ The iOS SDK is available for applications targeting iOS 9.0 and above.
 * This guide assumes you have obtained a key to use this
 framework, please contact us if you don't yet have one. *
 
-We support Cocoapods, Carthage, and manual Dynamic Framework installation. For those that require bitcode, we do build with bitcode enabled. 
+We support Cocoapods, Carthage, and Dynamic Framework installation.
+If your app uses the `CoreBluetooth` framework, you may install the `PureSDKBluetooth` in addition to `PureSDK`. 
+All of our frameworks have bitcode and simulator slices included.
+
+After finishing installation, head to the `Usage` section to set the SDK up. The header file `Pure.h` contains documentation as well.
+If you installed the `PureSDKBluetooth` framework, take care to read the `Bluetooth` section as well.
 
 ### Cocoapods
 
@@ -15,7 +20,14 @@ Use the following, with your key substituted in :
 
 ```ruby
 use_frameworks!
-pod 'PureSDK', :podspec => 'http://puresdk.azurewebsites.net/cocoapods/sdk/versions/latest?key=INSERT_KEY_HERE'
+pod 'PureSDK', :podspec => 'https://puresdk.azurewebsites.net/cocoapods/sdk/versions/latest?key=INSERT_KEY_HERE'
+pod 'PureSDKBluetooth', :podspec => 'https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/latest?key=INSERT_KEY_HERE'
+```
+
+If you'd like to specify a certain version, you can use the following link(s) instead (without a .zip ending!) :
+```
+https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.92?key=INSERT_KEY_HERE
+https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.92?key=INSERT_KEY_HERE
 ```
 
 ### Carthage
@@ -24,6 +36,7 @@ Use the following, with your key substituted in :
 
 ```ruby
 binary "https://puresdk.azurewebsites.net/carthage/sdk/PureSDK.json?key=INSERT_KEY_HERE"
+binary "https://puresdk.azurewebsites.net/carthage/sdk/PureSDKBluetooth.json?key=INSERT_KEY_HERE"
 ```
 
 Make sure you've followed the instructions on the Carthage website, specifically :
@@ -32,26 +45,44 @@ Make sure you've followed the instructions on the Carthage website, specifically
 
 ### Dynamic Framework
 
-Download the latest version of the framework from :
+Download the latest version of the framework(s) from :
 
-`https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.90.zip?key=INSERT_KEY_HERE`
+`https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.92.zip?key=INSERT_KEY_HERE`
+`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.92.zip?key=INSERT_KEY_HERE`
 
 1. Open your project in Xcode.
-2. Drag and drop `PureSDK.framework` into your project. Make sure the `Copy files` box is checked. *Uncheck* any selected targets. Click ok.
+2. Drag and drop `PureSDK.framework` (and optionally `PureSDKBluetooth.framework`) into your project. Make sure the `Copy files` box is checked. *Uncheck* any selected targets. Click ok.
 3. Select the target you wish to integrate the SDK into on the left-hand side of the project editor.
-5. Find the `Embedded Binaries` section under `General`, and add the `PureSDK.framework` that you just included into your project. This will also add the framework to the `Linked Libraries and Frameworks` section.
+5. Find the `Embedded Binaries` section under `General`, and add the `PureSDK.framework` (and optionally `PureSDKBluetooth.framework`) that you just included into your project. This will also add the framework to the `Linked Libraries and Frameworks` section.
 6. Navigate to `Build Phases`, click the small `+` in the left area of the window, and click `New Run Script Phase`.
-7. Paste the following line into the phase that was just added, and if you like rename the phase to "Strip Invalid Archs" :
-`bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDK.framework/strip-frameworks.sh"`
-This script (written by the excellent team at RealmCocoa!) removes architecture slices that are used on the iOS simulator.
+7. Paste the following line(s) into the phase that was just added, and if you like rename the phase to "Strip Invalid Archs". This script (written by the excellent people at Realm!) removes architecture slices that are used on the iOS simulator.
 
-That's it! These instructions were last tested on Xcode 9.4 (9F1027a) and Xcode 10.1 (10B61). For comparison, your `General` tab should look like this :
+```bash
+bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDK.framework/strip-frameworks.sh"
+bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDKBluetooth.framework/strip-frameworks.sh"
+```
+
+That's it! These instructions were last tested on Xcode 9.4 (9F1027a) and Xcode 10.1 (10B61).
+
+For comparison, your `General` tab should look like this :
 
 ![finished-settings](https://github.com/unacast/pure-sdk-ios/blob/master/dynamic_framework_integration_result.png)
 
 and the build phase "Strip Invalid Archs" should look like this :
 
-![run-script](https://github.com/unacast/pure-sdk-ios/blob/master/run_script.png)
+![finished-run-script](https://github.com/unacast/pure-sdk-ios/blob/master/blt_run_script.png)
+
+## Bluetooth
+
+Apple requires all apps that import the `CoreBluetooth` framework to explicitly state its intention under the `NSBluetoothPeripheralUsageDescription` key in the application's `Info.plist`. Because of this, our bluetooth tracking code comes bundled as an optional framework (`PureSDKBluetooth.framework`).
+
+To install the framework, first double check that the `NSBluetoothPeripheralUsageDescription` key is set to a reasonable string in your application's `Info.plist`. Failure to include this key will cause your app to be rejected on App Store Connect upload. Then, follow the instructions below depending on the preferred installation method. The `PureSDKBluetooth` framework cannot be installed independently from `PureSDK` since the bluetooth code requires the core SDK to function.
+
+If you include the `bluetooth-central` background perimission, then we are able to provide much more detailed eddystone data for you.
+
+Make sure you've followed the instructions on the Carthage website, specifically :
+1. Embedded Binaries should contain `Carthage/Build/iOS/PureSDK.framework` and `Carthage/Build/iOS/PureSDKBluetooth.framework` 
+2. Run script calling `/usr/local/bin/carthage copy-frameworks` (and opt. input/output file setup)
 
 ## Permissions
 
@@ -85,45 +116,6 @@ Find your app's `Info.plist`, right click, select `Open As`, tap `Source Code` a
 <string>We'll show you interesting things around you, and with the "always" option, we'll also send you notifications when you come across something cool.</string>
 ```
 
-### Bluetooth
-
-Apple requires all apps that import the `CoreBluetooth` framework to explicitly state its intention under the `NSBluetoothPeripheralUsageDescription` key in the application's `Info.plist`. Because of this, our bluetooth tracking code comes bundled as an optional framework (`PureSDKBluetooth.framework`).
-
-To install the framework, first double check that the `NSBluetoothPeripheralUsageDescription` key is set to a reasonable string in your application's `Info.plist`. Failure to include this key will cause your app to be rejected on App Store Connect upload. Then, follow the instructions below depending on the preferred installation method. The `PureSDKBluetooth` framework cannot be installed independently from `PureSDK` since the bluetooth code requires the core SDK to function.
-
-#### Coocoapods
-
-To install the `PureSDKBluetooth` component, your podfile should contain this :
-
-```ruby
-use_frameworks!
-pod 'PureSDK', :podspec => 'https://puresdk.azurewebsites.net/cocoapods/sdk/versions/latest?key=INSERT_KEY_HERE'
-pod 'PureSDKBluetooth', :podspec => 'https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/latest?key=INSERT_KEY_HERE'
-```
-
-#### Carthage
-
-```ruby
-binary "https://puresdk.azurewebsites.net/carthage/sdk/PureSDK.json?key=INSERT_KEY_HERE"
-binary "https://puresdk.azurewebsites.net/carthage/sdk/PureSDKBluetooth.json?key=INSERT_KEY_HERE"
-```
-
-Make sure you've followed the instructions on the Carthage website, specifically :
-1. Embedded Binaries should contain `Carthage/Build/iOS/PureSDK.framework` and `Carthage/Build/iOS/PureSDKBluetooth.framework` 
-2. Run script calling `/usr/local/bin/carthage copy-frameworks` (and opt. input/output file setup)
-
-#### Dynamic Framework
-
-The bluetooth framework can be downloaded at :
-
-`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.90.zip?key=INSERT_KEY_HERE`
-
-Then, follow instructions 1-6 as listed in  `Installation > Dynamic Framework`, except :
-1. use `PureSDKBluetooth.framework` instead of `PureSDK.framework`.
-2. add `bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDKBluetooth.framework/strip-frameworks.sh"` as a new line. The finished "Strip Invalid Archs" run script should look like this :
-
-![finished-run-script](https://github.com/unacast/pure-sdk-ios/blob/master/blt_run_script.png)
-
 ## Usage
 
 Two method calls are required to get the SDK to start tracking :
@@ -140,21 +132,13 @@ Then, somewhere of your choosing (can be placed right after the above call if de
 [Pure startTracking];
 ```
 
-`initializeWithLaunchOptions` must be called before any other methods can be called on `Pure.h`
+`initializeWithLaunchOptions` must be called before any other methods can be called on `Pure`
 
 At any time, event collection can be stopped by calling :
 
 ```objc
 [Pure stopTracking];
 ```
-
-We recently added deprecation warnings for the `PureSDK` class because we moved to just `Pure`.
-
-In addition, (in version 1.0.59) we added the `startTracking` call, which allows for better control of when the SDK tracks and when it doesn't. If you use the deprecated call `startTrackingWithLaunchOptions:`, this warning will be printed to the console :
-
-> PureSDK: Warning, deprecated method used. The SDK will still start, but the new initialization pattern is `[Pure initializeWithLaunchOptions:]` and then `[Pure startTracking]`. Check the `Usage` section in the documentation for a more in depth explanation.
-
-To fix this, replace the call to `startTrackingWithLaunchOptions:` with `initializeWithLaunchOptions:` and add a call to `startTracking` at an appropriate location for your app.
 
 ## Configuration
 
@@ -191,23 +175,21 @@ To associate some metadata with the current user, use :
 }];
 ```
 
-The `type` has to be unique for each payload you want to preserve.
-Subsequent calls to `associateMetadataWithType` with equal `type` values will overwrite the data sent on previous calls. This method requires that the SDK has been started (`[Pure startTracking]`), and will return an error if that is not the case. To override this behavior, use the overloaded method and pass `YES` for the `force` parameter.
-
-We recently deprecated the old event methods and tweaked the naming a little (added "withType" for a better Swift interface), but the old calls will continue to work until they are removed from the SDK. Warnings will be displayed if deprecated methods are used.
+The `type` has to be unique for each payload you want to preserve. Subsequent calls to `associateMetadataWithType` with equal `type` values will overwrite the data sent on previous calls. This method requires that the SDK has been started (`[Pure startTracking]`), and will return an error if that is not the case. To override this behavior, use the overloaded method and pass `YES` for the `force` parameter.
 
 ## Event Types
 
 Here is an overview of what kinds of data we collect and upload.
 
-1. Location
-2. iBeacons
+1. Location (always, whenInUse)
+2. iBeacons (always, whenInUse)
 3. Network Connection
+4. Visits (always)
 
 If the `PureSDKBluetooth` framework is installed, we also collect :
 
-4. Eddystone UID
-5. Eddystone URL
+5. Eddystone UID
+6. Eddystone URL
 
 Sample Location Event :
 

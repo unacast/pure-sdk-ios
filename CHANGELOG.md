@@ -1,7 +1,22 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.92
+- Allows `publisherId` to be updated while the SDK is running.
+- Fixes issue which prevented us from registering a geofence with iOS.
+
+## 1.0.91
+- Rework of backgrounding strategy for `always` location authoriziation users. Improves the amount of data we are able to collect.
+- Introduce circular region monitoring for users with `always` location authorization. Used in addition to signficiant location change monitoring.
+- Schedules more night-time discresionary config pings after the app is backgrounded. `scheduledFor` is now sent in scheduled config pings, indicating from what date iOS is permitted to send the request.
+- Stop using `earliestBeginDate` on event batch requests. Let the system send them whenever possible.
+- Significantly speed up event upload by dispatching background event uploads as foreground requests when the app is opened.
+- Introduce `maxIntervalBetweenEventBatches` (in favor of `minCellSendInterval` and `minWifiSendInterval`), which schedules a batch even if we have not reached `eventsMaxBatchSize` events.
+- Activates periodic location scanning while inside high priority regions for users with both `whileInUse` and `always` location authorization.
+- Device information no longer includes the device name, unless 1. the app is configured in debug mode, or 2. if the device name contains `fluxloop` or `unacast`.
+- Device information now contains `createdAt` and `regionMonitoringEnabled`. `createdAt` indicates when the information was collected, and `regionMonitoringEnabled` indicates if the device is capable of monitoring circular regions.
+
 ## 1.0.90
-- Fixes dispatch release pools not available on iOS 9.
+- Fixes iOS 9 crash due to dispatch release pools not being available.
 
 ## 1.0.89
 - Adds a `X-PUBLISHER-ID` header if `PURPublisherId` is set to a non-default value in the SDK's Info.plist. `publisherId` is always present in `device` event payloads, with a default value of `none`.
@@ -31,10 +46,10 @@ Any line containing "iOS11+", means only clients running iOS11 and greater will 
 - Fixes incorrect whileInUse permission observation which caused the service to stay inactive even with proper permissions.
 
 ## 1.0.83
-- Fix incorrect whitelisted area check.
+- Fix for location event delivery being canceled by incorrect whitelisted area check.
 
 ## 1.0.82
-- Fix issue which was be trigered by a certain high priority beacon configuration.
+- Fix issue which could be trigered by a certain high priority beacon configuration.
 
 ## 1.0.81
 - Ignores -1 battery report from iOS.
@@ -44,20 +59,18 @@ Any line containing "iOS11+", means only clients running iOS11 and greater will 
 - Support for beacons that activate high priority tracking.
 - Support for retrying iBeacon monitoring and ranging if iOS reports an error.
 - All timestamps now have five decimal points.
-
 - Tweak some calls to iOS to make iBeacon service much more reliable.
 - Set `Pure.enableLogging = YES` before calling init to print logs to console.
 - Reduce the amount of warning messages printed from Apple APIs.
 - Do our best to mitigate buggy Apple KVO Swift implementations in Swift <= 4.2.
-- Improve the likelyhood of timers triggering while we're operating in the background.
+- Improve the likelihood of timers triggering while we're operating in the background.
 - Reduce the number of trips to the database while processing events, and reduce the frequency of saves.
 - Wraps all database operations in background tasks to prevent iOS from terminating the app during the transaction.
-- Perform clean up of internal files at regular intervals, vaccum database when opening.
-
-- Fix crash which occured if we try to upload a missing file.
+- Perform clean up of internal files at regular intervals, vacuum database when opening.
+- Fix crash which occurred if we try to upload a missing file.
 - Fix adidLimited being forced to true in config requests.
 - Fix event deviceInfo containing invalid "timestamp" value.
-- Fix issue that could cause us to schedule too many background config requests.
+- Fix an issue that could cause us to schedule too many background config requests.
 - Fix a bug which caused duplicate event uploads.
 - Fix an issue which could cause us to miss a significant location event.
 
@@ -73,12 +86,12 @@ Any line containing "iOS11+", means only clients running iOS11 and greater will 
 - Changes encoding of "rssi" in Eddystone events to a number, previously it was a string.
 
 ## 1.0.76
-- Fixes case where we could loose track of a serialized event blob saved to disk.
-- Tweak uploading code so we're more resilient to force quits.
+- Fixes case where we could lose track of a serialized event blob saved to disk.
+- Tweak uploading code such that we're more resilient to force quits.
 - Better rescheduling of failed uploads.
 
 ## 1.0.75
-- Lower memory usage while deleting objects from local database.
+- Lower memory usage while deleting objects from the local database.
 - Slight network request optimizations.
 - Fixes a few memory leaks.
 
@@ -124,7 +137,7 @@ Any line containing "iOS11+", means only clients running iOS11 and greater will 
 - Tentative fix for crash in `valueForDefault:`.
 
 ## 1.0.68
-- Prevent the SDK from attatching itself as the UNNotificationCenter delegate unless debug mode is enabled.
+- Prevent the SDK from attaching itself as the UNNotificationCenter delegate unless debug mode is enabled.
 
 ## 1.0.67
 - Fixes SDK reporting version number '1.0' to server.
@@ -134,7 +147,7 @@ Any line containing "iOS11+", means only clients running iOS11 and greater will 
 - Implement internal timer with different timer API, with better background and battery performance.
 - Improve the speed at which live iBeacons are reported.
 - Dispatch to main thread before calling some methods on a location manager.
-- Create our tracked beacons with our own prefix, as to not conflict with any beacons you may be tracking.
+- Create our tracked beacons with our prefix, as to not conflict with any beacons you may be tracking.
 - Upload error logs to internal tracking endpoint.
 
 ## 1.0.65
@@ -146,7 +159,7 @@ Any line containing "iOS11+", means only clients running iOS11 and greater will 
 
 ## 1.0.63
 - Improve battery efficiency.
-- Adressed remaining memory leaks.
+- Addressed remaining memory leaks.
 - Fixed issue that prevented clients from archiving while bitcode was enabled.
 - Fix a bug that caused events with empty "event" payloads to be sent to the server.
 - Fixed issue that could cause the config service to fetch more often than necessary.
