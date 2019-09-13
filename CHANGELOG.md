@@ -1,5 +1,9 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.93
+- Reads publisherId from the application's Info.plist, not the framework's Info.plist.
+- Fixes "simulated_cell_type" being returned in device information.
+
 ## 1.0.92
 - Allows `publisherId` to be updated while the SDK is running.
 - Fixes issue which prevented us from registering a geofence with iOS.
