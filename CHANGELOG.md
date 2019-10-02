@@ -1,5 +1,15 @@
 Any line containing "iOS11+", means only clients running iOS11 and greater will have access to the feature.
 
+## 1.0.95
+- Fixes main thread warning in `PURSystemStateService`
+- Fixes `CBCentralManager` NSLog warning.
+
+## 1.0.94
+- Fixes triggering of bluetooth popup in iOS 13. Instantiate a `CBCentralManager` to trigger the popup, and the SDK will start collecting eddystone data.
+- Prevent logging code from recusing infinitely if we crash while logging.
+- Bugfixes for eddystone and iBeacon services in simulator code.
+- Fix case where iBeacon service could get stuck applying state updates.
+
 ## 1.0.93
 - Reads publisherId from the application's Info.plist, not the framework's Info.plist.
 - Fixes "simulated_cell_type" being returned in device information.

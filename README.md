@@ -26,8 +26,8 @@ pod 'PureSDKBluetooth', :podspec => 'https://puresdk.azurewebsites.net/cocoapods
 
 If you'd like to specify a certain version, you can use the following link(s) instead (without a .zip ending!) :
 ```
-https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.93?key=INSERT_KEY_HERE
-https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.93?key=INSERT_KEY_HERE
+https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.95?key=INSERT_KEY_HERE
+https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.95?key=INSERT_KEY_HERE
 ```
 
 ### Carthage
@@ -47,8 +47,8 @@ Make sure you've followed the instructions on the Carthage website, specifically
 
 Download the latest version of the framework(s) from :
 
-`https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.93.zip?key=INSERT_KEY_HERE`
-`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.93.zip?key=INSERT_KEY_HERE`
+`https://puresdk.azurewebsites.net/cocoapods/sdk/versions/1.0.95.zip?key=INSERT_KEY_HERE`
+`https://puresdk.azurewebsites.net/cocoapods/bluetooth/versions/1.0.95.zip?key=INSERT_KEY_HERE`
 
 1. Open your project in Xcode.
 2. Drag and drop `PureSDK.framework` (and optionally `PureSDKBluetooth.framework`) into your project. Make sure the `Copy files` box is checked. *Uncheck* any selected targets. Click ok.
